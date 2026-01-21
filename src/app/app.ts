@@ -1,11 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+//import { RouterOutlet } from '@angular/router';
+import {Home} from './home/home';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  template: ` <h1>Hello world!</h1> `,
+  //imports: [RouterOutlet],
+  template: `
+    <main>
+      <header class="brand-name">
+        <img class="brand-logo" src="logo.svg" alt="logo" aria-hidden="true" />
+      </header>
+      <section class="content">
+        <app-home />
+      </section>
+    </main>
+  `,
   styleUrls: ['./app.css'],
+  imports: [Home]
 })
 export class App {
   title = 'Homes';

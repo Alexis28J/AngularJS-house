@@ -12,3 +12,6 @@ Questo commando serve a creare un nuovo progetto Angular chiamato nome-applicazi
 
 5. Invio sull'opzione None
 
+
+https://www.pexels.com/it-it/: sito di immagini e video gratuiti (senza fare i loggin)
+
