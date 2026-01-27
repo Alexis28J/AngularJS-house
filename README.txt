@@ -25,4 +25,8 @@ Ultimo passo del tutorial (Aggiungere communicazione HTTP): Bisogna installare J
 https://angular.dev/tutorials/first-app/14-http
 
 
-Spiegazione passo a passo da Copilot: https://copilot.microsoft.com/shares/fgkvUcse172g1BZnf7uNy
+(Soluzione errore lancio server http://localhost:3000/locations: https://copilot.microsoft.com/shares/Ttdzy1CuWHhpkN29oNeoC): 
+Andare nel file db.json e lanciare npx json-server --watch db.json --port 3000
+per avviare JSON Server.
+
+
