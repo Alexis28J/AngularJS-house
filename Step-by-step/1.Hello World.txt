@@ -1,80 +1,97 @@
-🌟 In breve
-
-La pagina Hello world ti guida nel fare la prima modifica reale alla tua nuova applicazione Angular: cambiare il contenuto mostrato a schermo per far apparire il classico messaggio “Hello World”.
-Serve per verificare che l’ambiente funzioni e che tu sappia dove intervenire nel codice.
+La lezione serve per verificare che il tuo ambiente di sviluppo funzioni correttamente e per mostrarti come modificare i file principali di un’app Angular per visualizzare il testo “Hello world!”.
 
 
-🧭 Obiettivo della lezione
+🌱 Obiettivo della lezione
 
-    Assicurarti che il progetto Angular sia stato creato correttamente.
+La prima lezione del tutorial Angular ti guida a:
 
-    Mostrarti dove Angular mette il contenuto iniziale.
+    - scaricare il progetto iniziale;
+    - avviare l’app Angular di default;
+    - capire la struttura dei file principali;
+    - modificare il componente principale per mostrare “Hello world!”.
 
-    Farti modificare il template principale per visualizzare “Hello World”.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    Confermare che l’app si aggiorna automaticamente mentre la modifichi.
+📦 1. Scaricare l’app di partenza
 
+La pagina ti chiede di:
 
-🧪 1. Test dell’app di default
+    - cliccare sull’icona Download nell’editor (se usi l’editor integrato del sito);
+    - estrarre lo ZIP;
+    - aprire il progetto nel tuo IDE (VS Code, WebStorm, ecc.).
 
-Quando crei un nuovo progetto Angular con: ng new nome-progetto
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Angular genera un’applicazione base già funzionante.
+▶️ 2. Avviare l’app Angular
 
-La pagina Hello world ti fa:
+Nel terminale del tuo IDE:
 
-    avviare l’app con: ng serve
+    1. Vai nella cartella del progetto, ad esempio:
+    cd first-app
 
-    aprire il browser su http://localhost:4200
+    2. Installa le dipendenze:
+    npm install
 
-    verificare che l’app di default sia visibile (la classica pagina Angular con logo e link).
+    3. Avvia il server di sviluppo:
+    ng serve
 
-Questo passaggio serve solo a confermare che tutto è installato correttamente.
+Poi apri il browser su http://localhost:4200.
+Dovresti vedere l’app Angular di default.
 
+------------------------------------------------------------------------------------------------------------------------------------------------------
 
-📝 2. Modifica del template principale
+📁 3. Capire la struttura dei file
 
-L’app di default mostra contenuto che proviene dal file:
-Codice
+La lezione ti mostra i file più importanti:
+File / Cartella	         Funzione
+src/index.html	         Template HTML principale dell’app
+src/styles.css	         Foglio di stile globale
+src/main.ts	             Punto di ingresso dell’app
+src/app/app.ts	         Componente principale (app-root)
+src/app/app.css	         Stili del componente principale
+assets/	                 Immagini e risorse statiche
+angular.json	         Configurazione del progetto
+package.json	         Dipendenze e script npm
 
-src/app/app.component.html
+-----------------------------------------------------------------------------------------------------------------------------------------
 
-La lezione ti chiede di:
+✏️ 4. Modificare l’app per mostrare “Hello world!”
 
-    aprire questo file
+La parte centrale della lezione:
+🔹 Modifica del titolo in index.html
 
-    cancellare tutto il contenuto
-
-    scrivere semplicemente:
-
+Apri src/index.html e cambia il contenuto del tag <title>:
 html
 
-<h1>Hello World</h1>
+<title>Homes</title>
 
+(È solo un esempio per verificare che la modifica funzioni.)
+🔹 Modifica del componente principale in app.ts
 
-🔄 3. Aggiornamento automatico
+Apri src/app/app.ts e sostituisci la proprietà template con:
+ts
 
-Una volta salvato il file:
+template: `
+  <h1>Hello world!</h1>
+`,
 
-    Angular ricarica automaticamente la pagina nel browser
+E aggiorna anche la proprietà title se richiesto.
 
-    ora vedrai Hello World al posto della pagina iniziale
+---------------------------------------------------------------------------------------------------------------------------------------
 
-Questo dimostra:
+🌐 5. Verifica nel browser
 
-    che l’ambiente funziona
+Se ng serve è ancora attivo, la pagina si aggiorna automaticamente.
+Vai su http://localhost:4200 e dovresti vedere:
 
-    che sai dove si trova il template del componente principale
+    - Titolo della pagina: Homes
+    - Testo nel corpo: Hello world!
 
-    che Angular aggiorna l’app in tempo reale
-    
+✅ Cosa hai imparato
 
-🧠 4. Cosa hai imparato in questa pagina
+    - Come avviare un’app Angular.
+    - Come è organizzato un progetto Angular.
+    - Come modificare il componente principale.
+    - Come far apparire “Hello world!” nell’app.
 
-    Dove Angular mette il contenuto iniziale dell’app.
-
-    Come modificare il template del componente principale.
-
-    Come funziona il live reload.
-
-    Che il tuo setup è corretto e puoi continuare con le lezioni successive.
+Link Copilot:  https://copilot.microsoft.com/shares/ZqgmMV3yP8Sfo8ubVGJAL

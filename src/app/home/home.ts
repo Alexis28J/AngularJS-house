@@ -36,7 +36,7 @@ export class Home {
       });
   }
   filterResults(text: string) {
-    if (!text) {
+    if (!text) {  //SE IL TESTO NON ESISTE
       this.filteredLocationList = this.housingLocationList;
       return;
     }

@@ -1,71 +1,132 @@
-🏠 Cosa fa questa lezione
-
-La pagina Create Home component ti guida nella creazione del componente Home, che diventerà la pagina principale della tua applicazione.
-È il primo passo per strutturare l’app in più parti, invece di avere tutto dentro AppComponent.
+La lezione “Home” del tutorial Angular introduce il tuo primo componente reale: HomeComponent. 
+Imparerai a crearlo, collegarlo all’app e visualizzare una lista di case (mock) nella pagina principale.
 
 
-🔧 1. Creazione del componente Home
+🏡 Obiettivo della lezione
 
-La lezione ti fa usare l’Angular CLI per generare automaticamente un nuovo componente:
-ng generate component home
+La pagina 02‑Home ti guida a:
 
-oppure la versione abbreviata:
-ng g c home
+    creare un nuovo componente Angular chiamato HomeComponent;
 
-Questo comando crea una cartella: src/app/home/
+    aggiungerlo all’app come pagina principale;
 
-con quattro file:
+    preparare una piccola lista di dati (mock) da mostrare;
 
-    home.component.ts → definizione del componente
-    home.component.html → template
-    home.component.css → stile
-    home.component.spec.ts → test (puoi ignorarlo per ora)
+    visualizzare questi dati nel template tramite property binding e interpolazione.
 
-E aggiorna automaticamente app.module.ts per registrare il nuovo componente.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+🧩 1. Creazione del componente Home
+
+Il tutorial ti fa creare un file home.component.ts (o home.ts nella nuova struttura semplificata di Angular 17+).
+
+Il componente è simile a questo:
+ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  template: `
+    <section>
+      <h2>Homes</h2>
+    </section>
+  `,
+})
+export class HomeComponent {}
 
 
-🧱 2. Aggiungere il componente alla pagina principale
+Cosa impari qui:
+    - standalone: true → i componenti non richiedono più moduli.
+    - selector → il tag HTML che rappresenta il componente.
+    - template → il markup che verrà mostrato nella pagina.
 
-Dopo aver creato il componente, la lezione ti fa:
+--------------------------------------------------------------------------------------------------------------------------------------------------
 
-    aprire app.component.html
+🔗 2. Collegare HomeComponent all’app
 
-    sostituire il contenuto con il selettore del nuovo componente:
+Nel file app.ts (il componente root), devi importare e usare il nuovo componente:
+ts
 
+import { Component } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [HomeComponent],
+  template: `
+    <app-home></app-home>
+  `,
+})
+export class AppComponent {}
+
+Cosa succede:  
+Il componente principale ora mostra <app-home>, quindi la tua app visualizza la pagina Home.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+📦 3. Aggiungere dati mock (lista di case)
+
+Il tutorial introduce un array di oggetti che rappresentano case in vendita/affitto.
+
+Esempio:
+ts
+
+homes = [
+  {
+    id: 1,
+    name: 'Casa al mare',
+    image: 'assets/house1.jpg',
+    price: 120000
+  },
+  {
+    id: 2,
+    name: 'Appartamento in città',
+    image: 'assets/house2.jpg',
+    price: 200000
+  }
+];
+
+Questi dati vengono inseriti dentro HomeComponent.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+🖼️ 4. Visualizzare i dati nel template
+
+Il template viene aggiornato per mostrare la lista:
 html
 
-<app-home></app-home>
+<section>
+  <h2>Homes</h2>
 
-Il selettore (app-home) è definito dentro home.component.ts.
+  <ul>
+    <li *ngFor="let home of homes">
+      <img [src]="home.image" alt="">
+      <h3>{{ home.name }}</h3>
+      <p>Price: {{ home.price }}</p>
+    </li>
+  </ul>
+</section>
 
-Risultato: l’app ora mostra il contenuto del componente Home invece di quello di AppComponent.
+Concetti introdotti:
+
+    *ngFor → direttiva per iterare sugli array.
+
+    [src]="home.image" → property binding.
+
+    {{ home.name }} → interpolazione.
+
+----------------------------------------------------------------------------------------------------------------------------   
+
+🎯 5. Risultato finale
+
+Visitando http://localhost:4200, ora vedi:
+
+    un titolo “Homes”;
+
+    una lista di case con immagine, nome e prezzo.
+
+Hai creato la tua prima pagina vera e propria in Angular!
 
 
-📝 3. Modificare il template del componente Home
-
-La pagina ti fa aprire:
-src/app/home/home.component.html
-
-e inserire un contenuto semplice, ad esempio:
-html
-
-<h1>Home</h1>
-
-Quando salvi, Angular aggiorna automaticamente la pagina nel browser.
-
-
-🧠 4. Cosa stai imparando davvero
-
-Questa lezione introduce concetti fondamentali:
-✔️ Come si crea un componente Angular
-
-Usando la CLI, che genera tutta la struttura necessaria.
-✔️ Come funziona il selettore di un componente
-
-È il “tag HTML personalizzato” che rappresenta il componente.
-✔️ Come si compone un’app Angular
-
-Invece di un unico file, l’app è fatta di tanti componenti riutilizzabili.
-✔️ Come Angular aggiorna automaticamente l’app
-
-Ogni modifica ai file viene riflessa subito nel browser.
+Link Copilot: https://copilot.microsoft.com/shares/Ey6UVCeyb1Aggie2Yen4V

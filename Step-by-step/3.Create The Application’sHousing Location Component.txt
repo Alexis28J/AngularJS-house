@@ -1,0 +1,127 @@
+La lezione 03 – HousingLocation introduce un nuovo componente dedicato alla visualizzazione di una singola casa. 
+È un passo importante perché inizi a strutturare l’app in componenti riutilizzabili.
+
+
+🏠 Obiettivo della lezione
+
+Questa sezione ti guida a:
+
+    - creare il componente HousingLocationComponent;
+    - definire un’interfaccia TypeScript per descrivere una casa;
+    - passare dati dal componente Home a HousingLocation tramite property binding;
+    - mostrare le informazioni della casa in un layout più ricco.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+🧩 1. Creare l’interfaccia HousingLocation
+
+Per prima cosa, il tutorial ti fa creare un file con un’interfaccia che descrive la struttura dei dati di una casa.
+
+Esempio:
+ts
+
+export interface HousingLocation {
+  id: number;
+  name: string;
+  city: string;
+  state: string;
+  photo: string;
+  availableUnits: number;
+  wifi: boolean;
+  laundry: boolean;
+}
+
+Perché è utile:
+
+    - ti permette di avere dati tipizzati;
+    - aiuta l’IDE a suggerire proprietà corrette;
+    - riduce errori.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+🧱 2. Creare il componente HousingLocationComponent
+
+Il componente rappresenta una singola card di una casa.
+
+Esempio:
+ts
+
+import { Component, Input } from '@angular/core';
+import { HousingLocation } from '../housinglocation';
+
+@Component({
+  selector: 'app-housing-location',
+  standalone: true,
+  template: `
+    <section class="listing">
+      <img [src]="housingLocation?.photo" alt="Exterior photo of {{ housingLocation?.name }}">
+      <h2>{{ housingLocation?.name }}</h2>
+      <p>{{ housingLocation?.city }}, {{ housingLocation?.state }}</p>
+    </section>
+  `,
+  styleUrls: ['./housing-location.component.css']
+})
+export class HousingLocationComponent {
+  @Input() housingLocation!: HousingLocation;
+}
+
+Concetti introdotti:
+
+    - @Input() → permette al componente di ricevere dati dal genitore.
+    - standalone: true → nessun modulo necessario.
+    - housingLocation! → il punto esclamativo indica a TypeScript che il valore arriverà sicuramente.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+🔗 3. Usare il componente in HomeComponent
+
+Ora che hai un componente che rappresenta una singola casa, devi usarlo dentro la lista del componente Home.
+
+Nel template di HomeComponent:
+html
+
+<ul>
+  <li *ngFor="let home of homes">
+    <app-housing-location [housingLocation]="home"></app-housing-location>
+  </li>
+</ul>
+
+Cosa succede:
+
+    - *ngFor itera sulle case.
+    - Ogni casa viene passata al componente figlio tramite [housingLocation]="home".
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+🎨 4. Aggiungere lo stile
+
+Il tutorial fornisce anche uno stile base per rendere la card più gradevole.
+
+Esempio:
+css
+
+.listing {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.listing img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+🖼️ 5. Risultato finale
+
+A questo punto, la tua app mostra:
+
+    una lista di card, ognuna con:
+        - foto della casa,
+        - nome,
+        - città e stato.
+
+Stai iniziando a costruire un’interfaccia modulare e scalabile.
+
+
+Link Copilot:  https://copilot.microsoft.com/shares/P2kg1YPbCVdb7P1kgf9SS
