@@ -18,5 +18,8 @@ https://www.pexels.com/it-it/: sito di immagini e video gratuiti (senza fare i l
 (Soluzione a errore ng: https://copilot.microsoft.com/shares/YWSriVBHKGdQK6TYfRP5u)
 
 
+Installa Angular CLI globalmente: npm install -g @angular/cli
+
+
 Ultimo passo del tutorial (Aggiungere communicazione HTTP): Bisogna installare JSON server, quindi eseguire il commando npm install -g json-server
 https://angular.dev/tutorials/first-app/14-http
