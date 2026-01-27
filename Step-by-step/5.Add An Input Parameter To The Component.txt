@@ -1,0 +1,76 @@
+🎯 Obiettivo della pagina
+
+La pagina Add an input parameter to the component ti insegna a:
+
+    far sì che HousingLocationComponent possa ricevere un oggetto HousingLocation come parametro;
+
+    usare l’interfaccia che hai creato nella lezione precedente;
+
+    preparare il componente a mostrare dati reali.
+
+
+🧩 1. Importare Input e l’interfaccia
+
+Apri:
+src/app/housing-location/housing-location.component.ts
+
+La pagina ti fa aggiungere due import:
+ts
+
+import { Input } from '@angular/core';
+import { HousingLocation } from '../housinglocation';
+
+    Input serve per dichiarare proprietà che arrivano dall’esterno.
+
+    HousingLocation è l’interfaccia che descrive i dati della casa.
+
+
+🏷️ 2. Aggiungere la proprietà decorata con @Input()
+
+Dentro la classe del componente, aggiungi:
+ts
+
+@Input() housingLocation!: HousingLocation;
+
+Significato:
+
+    @Input() indica che questa proprietà può essere valorizzata da un componente padre.
+
+    housingLocation è il nome della proprietà.
+
+    !: HousingLocation dice a TypeScript: “fidati, questa proprietà verrà inizializzata”.
+
+Ora il componente è pronto a ricevere un oggetto con tutti i dati della casa.
+
+
+🧱 3. Preparare il template a usare i dati
+
+Nel file:
+src/app/housing-location/housing-location.component.html
+
+la pagina ti fa sostituire il contenuto con qualcosa che usa la proprietà:
+html
+
+<section>
+  <h2>{{ housingLocation.name }}</h2>
+  <p>{{ housingLocation.city }}, {{ housingLocation.state }}</p>
+</section>
+
+Questo è il primo esempio di data binding: Angular inserisce i valori reali nel template.
+
+
+🧠 4. Cosa stai imparando davvero
+
+Questa pagina introduce concetti fondamentali:
+✔️ Comunicazione tra componenti
+
+Il componente padre (Home) passerà i dati al componente figlio (HousingLocation).
+✔️ Tipizzazione forte con TypeScript
+
+La proprietà housingLocation deve rispettare l’interfaccia HousingLocation.
+✔️ Data binding
+
+Il template può mostrare i dati ricevuti tramite {{ }}.
+✔️ Componenti riutilizzabili
+
+Ora HousingLocationComponent può essere usato più volte, ognuno con dati diversi.

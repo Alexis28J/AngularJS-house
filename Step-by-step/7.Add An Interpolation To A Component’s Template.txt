@@ -1,0 +1,74 @@
+🎯 Obiettivo della lezione
+
+La pagina ti insegna a:
+
+    usare l’interpolazione per mostrare i dati dell’oggetto HousingLocation;
+
+    aggiornare il template del componente HousingLocationComponent;
+
+    capire come Angular inserisce valori dinamici nell’HTML.
+
+
+🧱 1. Aprire il template del componente
+
+Il file da modificare è:
+src/app/housing-location/housing-location.component.html
+
+Finora conteneva solo testo statico.
+Ora lo aggiornerai per mostrare i dati reali.
+
+
+🧩 2. Aggiungere l’interpolazione
+
+La pagina ti fa sostituire il contenuto con qualcosa di simile:
+html
+
+<section>
+  <h2>{{ housingLocation.name }}</h2>
+  <p>{{ housingLocation.city }}, {{ housingLocation.state }}</p>
+</section>
+
+Qui succedono due cose importanti:
+✔️ {{ housingLocation.name }}
+
+Angular inserisce il valore della proprietà name dell’oggetto ricevuto tramite @Input().
+✔️ Composizione di valori
+
+Puoi combinare più proprietà nella stessa riga, come:
+Codice
+
+{{ housingLocation.city }}, {{ housingLocation.state }}
+
+
+🧠 3. Cosa stai imparando davvero
+
+Questa pagina introduce un concetto chiave di Angular:
+✔️ Interpolazione
+
+È il modo più semplice per mostrare dati dinamici nel template.
+✔️ Collegamento tra TypeScript e HTML
+
+Il template può accedere alle proprietà pubbliche della classe del componente.
+✔️ Dati passati dal padre al figlio
+
+L’interpolazione funziona perché il componente riceve i dati tramite:
+ts
+
+@Input() housingLocation!: HousingLocation;
+
+✔️ Rendering dinamico
+
+Ogni volta che i dati cambiano, Angular aggiorna automaticamente il DOM.
+
+
+🖼️ 4. Risultato finale
+
+Dopo questa lezione:
+
+    ogni card HousingLocationComponent mostra il nome e la posizione della casa;
+
+    i dati provengono dall’array della Home;
+
+    l’interfaccia HousingLocation garantisce che i campi siano corretti.
+
+L’app ora inizia davvero a prendere forma.

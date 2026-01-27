@@ -1,0 +1,77 @@
+🏡 Obiettivo della lezione
+
+Questa pagina ti guida a creare un componente che mostrerà i dati di una singola proprietà immobiliare (nome, città, foto, ecc.).
+Più avanti, questo componente verrà usato ripetutamente per costruire la lista completa delle case.
+
+In pratica: stai creando il “mattoncino” base dell’intera app.
+
+
+🔧 1. Creazione del componente HousingLocation
+
+Come sempre, si usa l’Angular CLI:
+Codice
+
+ng generate component housing-location
+
+oppure:
+ng g c housing-location
+
+Questo comando crea la cartella:
+src/app/housing-location/
+
+con i soliti quattro file:
+
+    housing-location.component.ts
+    housing-location.component.html
+    housing-location.component.css
+    housing-location.component.spec.ts
+
+
+🧱 2. Aggiungere il componente alla Home
+
+La lezione ti fa aprire:
+src/app/home/home.component.html
+
+e inserire il selettore del nuovo componente:
+html
+
+<app-housing-location></app-housing-location>
+
+Se salvi, vedrai il contenuto del nuovo componente apparire nella pagina Home.
+
+
+📝 3. Modifica del template del componente
+
+Ora apri:
+src/app/housing-location/housing-location.component.html
+
+e inserisci un contenuto semplice, ad esempio:
+html
+
+<p>Housing Location Works!</p>
+
+Questo serve solo per verificare che il componente funzioni e venga visualizzato correttamente.
+
+
+🧠 4. Cosa stai imparando davvero
+
+Questa lezione introduce concetti fondamentali per qualsiasi app Angular:
+✔️ Creare componenti riutilizzabili
+
+Il componente HousingLocation verrà usato più volte, uno per ogni casa.
+✔️ Separare struttura, stile e logica
+
+Ogni componente ha:
+
+    un file HTML (vista)
+
+    un file CSS (stile)
+
+    un file TypeScript (logica)
+
+✔️ Comporre l’interfaccia con componenti annidati
+
+La Home contiene più HousingLocation, e AppComponent contiene Home.
+✔️ Preparare la struttura per i dati
+
+Nelle lezioni successive, questo componente riceverà dati tramite @Input(), un concetto chiave.

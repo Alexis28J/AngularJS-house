@@ -1,0 +1,124 @@
+È il momento in cui la tua applicazione smette di essere una singola pagina statica e diventa una vera SPA (Single Page Application).
+
+
+🧭 Obiettivo della lezione
+
+La pagina ti insegna a:
+
+    configurare il router di Angular
+
+    definire le prime rotte dell’app
+
+    collegare i componenti alle rotte
+
+    usare <router-outlet> per mostrare le pagine
+
+Dopo questa lezione potrai navigare tra Home e Details.
+
+
+🧱 1. Creare il file di routing
+
+Angular crea automaticamente un file di routing quando generi il progetto:
+src/app/app.routes.ts
+
+Se non esistesse, la lezione ti farebbe crearlo, ma nel tutorial è già presente.
+
+Questo file conterrà la definizione delle rotte.
+
+
+🗺️ 2. Definire le rotte dell’app
+
+La pagina ti fa aprire:
+src/app/app.routes.ts
+
+e aggiungere qualcosa di simile:
+ts
+
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { DetailsComponent } from './details/details.component';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'details/:id',
+    component: DetailsComponent
+  }
+];
+
+Vediamo cosa significa.
+✔️ path: ''
+
+La rotta vuota è la homepage.
+✔️ path: 'details/:id'
+
+Questa rotta mostra i dettagli di una singola casa.
+id è un parametro dinamico: ogni casa avrà un URL diverso.
+
+
+🧩 3. Aggiungere il router all’app
+
+Nel file:
+src/app/app.component.html
+
+la pagina ti fa sostituire il contenuto con:
+html
+
+<router-outlet></router-outlet>
+
+Questo tag speciale è il punto in cui Angular inserirà il componente corrispondente alla rotta attiva.
+
+È come dire:
+
+    “Mostra qui la pagina corrente”.
+
+
+🔗 4. Aggiornare il main.ts
+
+Il file main.ts deve dire ad Angular di usare il router.
+
+La pagina ti fa aggiungere:
+ts
+
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes)
+  ]
+});
+
+Questo collega le rotte definite al sistema di bootstrap dell’app.
+
+
+🧠 5. Cosa stai imparando davvero
+✔️ Routing moderno con provideRouter
+
+Angular usa un approccio più semplice rispetto ai vecchi moduli.
+✔️ Parametri dinamici nelle rotte
+
+details/:id permette di creare pagine diverse per ogni casa.
+✔️ Separazione tra struttura e navigazione
+
+I componenti non decidono dove appaiono: lo fa il router.
+✔️ SPA (Single Page Application)
+
+La navigazione avviene senza ricaricare la pagina.
+
+
+🖼️ 6. Risultato finale
+
+Dopo questa lezione:
+
+    la tua app ha due pagine: Home e Details
+
+    puoi navigare tra loro tramite URL
+
+    <router-outlet> mostra la pagina corretta
+
+    sei pronto per aggiungere i link e caricare i dati della singola casa
+

@@ -1,0 +1,105 @@
+🎯 Obiettivo della lezione
+
+La pagina ti mostra come:
+
+    creare un array di HousingLocation nella Home;
+
+    passare ogni oggetto al componente HousingLocationComponent;
+
+    usare il property binding con la sintassi [property]="value".
+
+È il passo che trasforma la tua app da statica a dinamica.
+
+
+🧱 1. Creare un array di HousingLocation nella Home
+
+Apri:
+src/app/home/home.component.ts
+
+La lezione ti fa:
+
+    importare l’interfaccia:
+
+ts
+
+import { HousingLocation } from '../housinglocation';
+
+    creare una proprietà con un array di case (per ora dati fittizi):
+
+ts
+
+housingLocationList: HousingLocation[] = [
+  {
+    id: 1,
+    name: 'Acme Fresh Start Housing',
+    city: 'Chicago',
+    state: 'IL',
+    photo: 'some-url.jpg',
+    availableUnits: 4,
+    wifi: true,
+    laundry: true
+  },
+  // …altre case
+];
+
+Questo array rappresenta la lista delle proprietà che verranno mostrate nella Home.
+
+
+🔗 2. Usare il property binding nel template della Home
+
+Apri:
+src/app/home/home.component.html
+
+La pagina ti fa sostituire il contenuto con un *ngFor:
+html
+
+<section>
+  <app-housing-location
+    *ngFor="let housingLocation of housingLocationList"
+    [housingLocation]="housingLocation">
+  </app-housing-location>
+</section>
+
+Qui succedono due cose importantissime:
+✔️ *ngFor
+
+Ripete il componente app-housing-location per ogni elemento dell’array.
+✔️ [housingLocation]="housingLocation"
+
+Questo è il property binding:
+
+    a sinistra: il nome della proprietà @Input() del componente figlio
+
+    a destra: il valore da passare (l’oggetto corrente del ciclo)
+
+In pratica: ogni componente figlio riceve i dati della sua casa.
+
+
+🧠 3. Cosa stai imparando davvero
+
+Questa pagina introduce concetti fondamentali di Angular:
+✔️ Property binding
+
+La sintassi [prop]="value" permette di passare dati dal padre al figlio.
+✔️ Comunicazione tra componenti
+
+HomeComponent → passa dati → HousingLocationComponent.
+✔️ Uso di *ngFor
+
+Angular genera dinamicamente tanti componenti quanti sono gli elementi dell’array.
+✔️ Componenti riutilizzabili
+
+HousingLocationComponent viene istanziato più volte, ognuno con dati diversi.
+
+
+🖼️ 4. Risultato finale
+
+Dopo questa lezione:
+
+    la Home mostra una lista di case;
+
+    ogni card è un’istanza di HousingLocationComponent;
+
+    i dati sono reali e provengono dall’array del componente padre.
+
+È il primo momento in cui l’app inizia a sembrare un’app vera.

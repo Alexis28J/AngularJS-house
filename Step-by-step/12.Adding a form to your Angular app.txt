@@ -1,0 +1,149 @@
+Nella pagina Adding a form to your Angular app, aggiungerai un piccolo modulo nella pagina dei dettagli per simulare una richiesta di affitto.
+È il primo momento in cui l’utente può interagire davvero con la tua applicazione.
+
+
+🎯 Obiettivo della lezione
+
+La pagina ti guida a:
+
+    aggiungere un form nella pagina dei dettagli
+
+    collegare gli input a proprietà del componente
+
+    gestire l’invio del form
+
+    usare FormsModule per abilitare il two‑way binding
+
+Alla fine, l’utente potrà compilare nome, email e numero di telefono e inviare la richiesta.
+
+
+🧱 1. Abilitare i form in Angular
+
+Per usare i form template‑driven, devi importare FormsModule.
+
+Apri:
+src/app/app.component.ts
+
+e aggiungi:
+ts
+
+import { FormsModule } from '@angular/forms';
+
+Poi includilo nei provider del bootstrap:
+ts
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    importProvidersFrom(FormsModule)
+  ]
+});
+
+Questo permette ad Angular di usare [(ngModel)].
+
+
+📝 2. Aggiungere il form nel template dei dettagli
+
+Apri:
+src/app/details/details.component.html
+
+La pagina ti fa aggiungere un form simile a questo:
+html
+
+<form (submit)="submitApplication()">
+  <label for="first-name">First Name</label>
+  <input id="first-name" name="first-name" [(ngModel)]="firstName">
+
+  <label for="last-name">Last Name</label>
+  <input id="last-name" name="last-name" [(ngModel)]="lastName">
+
+  <label for="email">Email</label>
+  <input id="email" name="email" [(ngModel)]="email">
+
+  <button type="submit">Apply Now</button>
+</form>
+
+Vediamo cosa succede.
+✔️ [(ngModel)]
+
+Collega l’input a una proprietà del componente (two‑way binding).
+✔️ (submit)="submitApplication()"
+
+Chiama un metodo del componente quando l’utente invia il form.
+
+
+🧩 3. Aggiungere le proprietà nel componente
+
+Apri:
+src/app/details/details.component.ts
+
+e aggiungi:
+ts
+
+firstName = '';
+lastName = '';
+email = '';
+
+Queste proprietà vengono aggiornate automaticamente mentre l’utente digita.
+
+
+🚀 4. Gestire l’invio del form
+
+Nel componente aggiungi il metodo:
+ts
+
+submitApplication() {
+  const applicationData = {
+    firstName: this.firstName,
+    lastName: this.lastName,
+    email: this.email
+  };
+
+  console.log(applicationData);
+}
+
+Nella versione del tutorial, questo metodo chiama un metodo del servizio, ad esempio:
+ts
+
+this.housingService.submitApplication(
+  this.firstName,
+  this.lastName,
+  this.email
+);
+
+E nel servizio:
+ts
+
+submitApplication(firstName: string, lastName: string, email: string) {
+  console.log(`Application received: ${firstName} ${lastName} (${email})`);
+}
+
+
+🧠 5. Cosa stai imparando davvero
+✔️ Two‑way data binding
+
+[(ngModel)] collega input e proprietà del componente.
+✔️ Event binding
+
+(submit)="..." permette di reagire alle azioni dell’utente.
+✔️ Separazione della logica
+
+Il componente raccoglie i dati, il servizio li gestisce.
+✔️ Struttura dei form template‑driven
+
+È il modo più semplice per iniziare con i form in Angular.
+
+
+🖼️ 6. Risultato finale
+
+Dopo questa lezione:
+
+    la pagina dei dettagli ha un form funzionante
+
+    l’utente può inserire nome, cognome ed email
+
+    i dati vengono inviati al servizio
+
+    la tua app ora ha una vera interazione utente
+
+È un grande passo verso un’app completa.

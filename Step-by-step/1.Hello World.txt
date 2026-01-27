@@ -1,0 +1,80 @@
+🌟 In breve
+
+La pagina Hello world ti guida nel fare la prima modifica reale alla tua nuova applicazione Angular: cambiare il contenuto mostrato a schermo per far apparire il classico messaggio “Hello World”.
+Serve per verificare che l’ambiente funzioni e che tu sappia dove intervenire nel codice.
+
+
+🧭 Obiettivo della lezione
+
+    Assicurarti che il progetto Angular sia stato creato correttamente.
+
+    Mostrarti dove Angular mette il contenuto iniziale.
+
+    Farti modificare il template principale per visualizzare “Hello World”.
+
+    Confermare che l’app si aggiorna automaticamente mentre la modifichi.
+
+
+🧪 1. Test dell’app di default
+
+Quando crei un nuovo progetto Angular con: ng new nome-progetto
+
+Angular genera un’applicazione base già funzionante.
+
+La pagina Hello world ti fa:
+
+    avviare l’app con: ng serve
+
+    aprire il browser su http://localhost:4200
+
+    verificare che l’app di default sia visibile (la classica pagina Angular con logo e link).
+
+Questo passaggio serve solo a confermare che tutto è installato correttamente.
+
+
+📝 2. Modifica del template principale
+
+L’app di default mostra contenuto che proviene dal file:
+Codice
+
+src/app/app.component.html
+
+La lezione ti chiede di:
+
+    aprire questo file
+
+    cancellare tutto il contenuto
+
+    scrivere semplicemente:
+
+html
+
+<h1>Hello World</h1>
+
+
+🔄 3. Aggiornamento automatico
+
+Una volta salvato il file:
+
+    Angular ricarica automaticamente la pagina nel browser
+
+    ora vedrai Hello World al posto della pagina iniziale
+
+Questo dimostra:
+
+    che l’ambiente funziona
+
+    che sai dove si trova il template del componente principale
+
+    che Angular aggiorna l’app in tempo reale
+    
+
+🧠 4. Cosa hai imparato in questa pagina
+
+    Dove Angular mette il contenuto iniziale dell’app.
+
+    Come modificare il template del componente principale.
+
+    Come funziona il live reload.
+
+    Che il tuo setup è corretto e puoi continuare con le lezioni successive.

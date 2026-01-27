@@ -1,0 +1,71 @@
+🏠 Cosa fa questa lezione
+
+La pagina Create Home component ti guida nella creazione del componente Home, che diventerà la pagina principale della tua applicazione.
+È il primo passo per strutturare l’app in più parti, invece di avere tutto dentro AppComponent.
+
+
+🔧 1. Creazione del componente Home
+
+La lezione ti fa usare l’Angular CLI per generare automaticamente un nuovo componente:
+ng generate component home
+
+oppure la versione abbreviata:
+ng g c home
+
+Questo comando crea una cartella: src/app/home/
+
+con quattro file:
+
+    home.component.ts → definizione del componente
+    home.component.html → template
+    home.component.css → stile
+    home.component.spec.ts → test (puoi ignorarlo per ora)
+
+E aggiorna automaticamente app.module.ts per registrare il nuovo componente.
+
+
+🧱 2. Aggiungere il componente alla pagina principale
+
+Dopo aver creato il componente, la lezione ti fa:
+
+    aprire app.component.html
+
+    sostituire il contenuto con il selettore del nuovo componente:
+
+html
+
+<app-home></app-home>
+
+Il selettore (app-home) è definito dentro home.component.ts.
+
+Risultato: l’app ora mostra il contenuto del componente Home invece di quello di AppComponent.
+
+
+📝 3. Modificare il template del componente Home
+
+La pagina ti fa aprire:
+src/app/home/home.component.html
+
+e inserire un contenuto semplice, ad esempio:
+html
+
+<h1>Home</h1>
+
+Quando salvi, Angular aggiorna automaticamente la pagina nel browser.
+
+
+🧠 4. Cosa stai imparando davvero
+
+Questa lezione introduce concetti fondamentali:
+✔️ Come si crea un componente Angular
+
+Usando la CLI, che genera tutta la struttura necessaria.
+✔️ Come funziona il selettore di un componente
+
+È il “tag HTML personalizzato” che rappresenta il componente.
+✔️ Come si compone un’app Angular
+
+Invece di un unico file, l’app è fatta di tanti componenti riutilizzabili.
+✔️ Come Angular aggiorna automaticamente l’app
+
+Ogni modifica ai file viene riflessa subito nel browser.

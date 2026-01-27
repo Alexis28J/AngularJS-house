@@ -1,0 +1,86 @@
+L’introduzione del tutorial “Your first Angular app” spiega in modo chiaro cosa imparerai, cosa ti serve per iniziare e quale tipo di applicazione costruirai: una piccola app che mostra case in affitto e i dettagli di ciascuna.  
+Di seguito trovi una spiegazione completa e organizzata di tutto ciò che viene detto nella sezione Introduction.
+(Contenuti basati sulla pagina che hai indicato )
+
+🧭 Obiettivo del tutorial
+
+    Il tutorial è composto da una serie di lezioni che introducono i concetti fondamentali di Angular.
+
+    Puoi seguirle tutte oppure solo alcune, e non è necessario farle in ordine.
+
+    L’obiettivo è farti costruire la tua prima applicazione Angular funzionante.
+
+🎯 Cosa imparerai
+
+L’app che costruirai:
+
+    mostra una lista di case in affitto;
+
+    permette di visualizzare i dettagli di ogni casa;
+
+    utilizza funzionalità tipiche di molte app Angular (componenti, template, routing, ecc.).
+
+Questa app è pensata come un esempio semplice ma realistico per introdurre i concetti fondamentali.
+
+🧰 Cosa dovresti già sapere
+
+Il tutorial dà per scontata una conoscenza di base di:
+
+    HTML (creare una pagina modificando direttamente il markup);
+
+    JavaScript (programmare contenuti web);
+
+    CSS (capire come funzionano i selettori);
+
+    uso della command line (terminali, comandi base).
+
+
+💻 Cosa ti serve per lavorare
+
+Puoi seguire il tutorial in due modi:
+
+    Ambiente locale (installando Angular sul tuo computer)
+
+    Editor integrato online (fornito direttamente nel sito)
+
+Per lo sviluppo locale servono:
+
+    un sistema Windows, macOS o Linux;
+
+    una versione di Node.js  LTS compatibile con Angular;
+
+    l’installazione dell’Angular CLI tramite:
+    Codice
+
+    npm install -g @angular/cli
+
+    un editor di codice (consigliato Visual Studio Code o WebStorm).
+
+
+🧪 Prima di iniziare: controlli e installazioni
+
+L’introduzione ti guida a:
+
+    verificare la versione di Node con:
+    Codice
+
+    node --version
+
+    installare Node se necessario;
+
+    installare Angular CLI;
+
+    configurare l’IDE;
+
+    opzionalmente, attivare strumenti AI nell’IDE.
+    
+
+📚 Risorse aggiuntive
+
+Alla fine della sezione vengono suggeriti approfondimenti:
+
+    What is Angular
+
+    Setting up the local environment and workspace
+
+    Angular CLI Reference

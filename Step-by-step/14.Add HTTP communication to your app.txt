@@ -1,0 +1,161 @@
+Qui la tua applicazione smette di usare dati “hardcoded” e inizia a caricare i dati da un server tramite richieste HTTP.
+È il passo che trasforma la tua app in qualcosa di molto più realistico.
+
+
+🌐 Obiettivo della lezione
+
+La pagina ti guida a:
+
+    usare HttpClient per fare richieste HTTP
+
+    configurare Angular per usare il modulo HTTP
+
+    modificare il servizio per recuperare i dati da un endpoint
+
+    aggiornare i componenti per lavorare in modo asincrono
+
+Alla fine, la tua app caricherà i dati delle case da un file JSON remoto.
+
+
+🧱 1. Abilitare HttpClient nell’app
+
+Apri:
+src/main.ts
+
+e aggiungi:
+ts
+
+import { provideHttpClient } from '@angular/common/http';
+
+Poi includi il provider:
+ts
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient()
+  ]
+});
+
+Questo permette all’app di usare HttpClient.
+
+
+📦 2. Modificare il servizio per usare HTTP
+
+Apri:
+src/app/housing.service.ts
+
+e importa:
+ts
+
+import { HttpClient } from '@angular/common/http';
+
+Poi aggiorna il costruttore:
+ts
+
+constructor(private http: HttpClient) {}
+
+Ora il servizio può fare richieste HTTP.
+
+
+🌍 3. Recuperare la lista delle case da un endpoint
+
+Il tutorial usa un file JSON ospitato online.
+
+Nel servizio, sostituisci l’array statico con:
+ts
+
+private url = 'https://angular.dev/assets/housing.json';
+
+Poi aggiorna il metodo:
+ts
+
+getAllHousingLocations() {
+  return this.http.get<HousingLocation[]>(this.url);
+}
+
+Notiamo due cose:
+✔️ this.http.get<T>()
+
+Restituisce un Observable, non un array immediato.
+✔️ Tipizzazione forte
+
+<HousingLocation[]> dice a TypeScript che ti aspetti un array di case.
+
+
+🔍 4. Recuperare una singola casa per ID
+
+Aggiorna anche il metodo per ottenere un singolo elemento:
+ts
+
+getHousingLocationById(id: number) {
+  return this.http.get<HousingLocation>(`${this.url}/${id}`);
+}
+
+Nel tutorial, l’endpoint potrebbe essere diverso, ma il concetto è lo stesso.
+🔄 5. Aggiornare HomeComponent per usare i dati asincroni
+
+Apri:
+src/app/home/home.component.ts
+
+e modifica ngOnInit():
+ts
+
+this.housingService.getAllHousingLocations().subscribe({
+  next: (housingLocations) => {
+    this.housingLocationList = housingLocations;
+    this.filteredLocationList = housingLocations;
+  }
+});
+
+✔️ Perché serve subscribe()?
+
+Perché http.get() restituisce un Observable, che rappresenta una risposta futura.
+
+
+📄 6. Aggiornare DetailsComponent
+
+Apri:
+src/app/details/details.component.ts
+
+e modifica il caricamento dei dati:
+ts
+
+this.housingService.getHousingLocationById(housingLocationId).subscribe({
+  next: (housingLocation) => {
+    this.housingLocation = housingLocation;
+  }
+});
+
+Ora anche la pagina dei dettagli carica i dati dal server.
+
+
+🧠 7. Cosa stai imparando davvero
+✔️ HTTP client moderno in Angular
+
+HttpClient è il modo standard per fare richieste REST.
+✔️ Programmazione asincrona
+
+Le risposte arrivano nel futuro → si usano gli Observable.
+✔️ Separazione della logica
+
+Il servizio gestisce le chiamate HTTP, i componenti mostrano i dati.
+✔️ Tipizzazione forte
+
+Le risposte sono tipizzate con l’interfaccia HousingLocation.
+✔️ App realistica
+
+Ora i dati non sono più locali, ma caricati da un server.
+
+
+🖼️ 8. Risultato finale
+
+Dopo questa lezione:
+
+    la tua app carica i dati da un endpoint remoto
+
+    la Home mostra la lista delle case ottenute via HTTP
+
+    la pagina dei dettagli carica i dati della singola casa
+
+    l’app è molto più vicina a un’app reale

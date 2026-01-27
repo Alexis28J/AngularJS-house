@@ -1,0 +1,143 @@
+🌟 Perché servono i servizi in Angular
+
+Finora i dati delle case erano scritti direttamente dentro HomeComponent.
+Questo va bene per un esempio, ma non per un’app reale.
+
+Un service permette di:
+
+    centralizzare i dati in un unico posto
+
+    riutilizzare la stessa logica in più componenti
+
+    preparare l’app a recuperare dati da un server
+
+    mantenere i componenti più semplici e puliti
+
+È un concetto chiave dell’architettura Angular.
+
+
+🛠️ 1. Creare il servizio HousingService
+
+La pagina ti fa usare la CLI:
+ng generate service housing
+
+oppure:
+ng g s housing
+
+Questo comando crea due file:
+Codice
+
+src/app/housing.service.ts
+src/app/housing.service.spec.ts
+
+Il file importante è housing.service.ts.
+
+
+📦 2. Spostare i dati nel servizio
+
+La pagina ti fa prendere l’array housingLocationList che era in HomeComponent e spostarlo nel servizio.
+
+Il servizio avrà una struttura simile:
+ts
+
+import { Injectable } from '@angular/core';
+import { HousingLocation } from './housinglocation';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HousingService {
+  housingLocationList: HousingLocation[] = [
+    // ... dati delle case
+  ];
+
+  getAllHousingLocations(): HousingLocation[] {
+    return this.housingLocationList;
+  }
+}
+
+Vediamo cosa significa.
+
+
+🧠 3. Cosa stai imparando qui
+✔️ @Injectable({ providedIn: 'root' })
+
+Dice ad Angular che il servizio è disponibile ovunque nell’app, senza bisogno di registrarlo manualmente.
+✔️ Incapsulamento dei dati
+
+I dati ora vivono nel servizio, non nel componente.
+✔️ Metodi per accedere ai dati
+
+getAllHousingLocations() è un metodo che restituisce la lista delle case.
+Più avanti aggiungerai anche un metodo per ottenere una singola casa per ID.
+
+
+🔗 4. Usare il servizio nella Home
+
+Ora apri:
+src/app/home/home.component.ts
+
+e modifichi il componente per usare il servizio.
+
+La pagina ti fa:
+
+    importare il servizio
+
+ts
+
+import { HousingService } from '../housing.service';
+
+    iniettarlo nel costruttore
+
+ts
+
+constructor(private housingService: HousingService) {}
+
+    recuperare i dati dal servizio
+
+ts
+
+housingLocationList: HousingLocation[] = [];
+
+ngOnInit() {
+  this.housingLocationList = this.housingService.getAllHousingLocations();
+}
+
+Ora il componente non contiene più i dati, ma li richiede al servizio.
+
+
+🧠 5. Cosa stai imparando davvero
+✔️ Dependency Injection
+
+Angular crea automaticamente un’istanza del servizio e la fornisce al componente.
+✔️ Separazione delle responsabilità
+
+    Il servizio gestisce i dati.
+
+    Il componente gestisce la UI.
+
+✔️ Architettura scalabile
+
+Questa è la base per:
+
+    chiamate HTTP
+
+    caching
+
+    logiche di business
+
+    condivisione dei dati tra componenti
+
+    
+
+🖼️ 6. Risultato finale
+
+Dopo questa lezione:
+
+    i dati non sono più nel componente
+
+    la Home li ottiene tramite il servizio
+
+    l’app è più pulita, modulare e professionale
+
+È un grande passo avanti.

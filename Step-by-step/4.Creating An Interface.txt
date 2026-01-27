@@ -1,0 +1,76 @@
+🧩 Perché creare un’interfaccia?
+
+L’app che stai costruendo deve mostrare una lista di case.
+Ogni casa ha proprietà come:
+
+    nome
+
+    città
+
+    stato
+
+    foto
+
+    numero di camere
+
+    ecc.
+
+In TypeScript, il modo migliore per descrivere la struttura di un oggetto è creare un’interfaccia.
+
+L’interfaccia serve a:
+
+    definire quali campi deve avere ogni “housing location”
+
+    garantire che i dati siano coerenti
+
+    aiutare l’editor a darti suggerimenti e prevenire errori
+
+
+🛠️ 1. Creare il file dell’interfaccia
+
+La lezione ti fa creare un nuovo file:
+src/app/housinglocation.ts
+
+    Nota: non è un componente, quindi non usi la CLI. Lo crei manualmente.
+
+
+📝 2. Definire l’interfaccia HousingLocation
+
+Nel file appena creato, inserisci un’interfaccia simile a questa (il tutorial usa una struttura molto vicina):
+ts
+
+export interface HousingLocation {
+  id: number;
+  name: string;
+  city: string;
+  state: string;
+  photo: string;
+  availableUnits: number;
+  wifi: boolean;
+  laundry: boolean;
+}
+
+Questa interfaccia descrive tutti i campi che ogni casa deve avere.
+
+
+🧠 3. Cosa stai imparando davvero
+
+Questa lezione introduce concetti fondamentali:
+✔️ TypeScript come linguaggio tipizzato
+
+Angular usa TypeScript, quindi definire tipi e interfacce è una pratica standard.
+✔️ Strutturare i dati dell’app
+
+Stai creando il “modello” dei dati che userai in tutta l’app.
+✔️ Prevenire errori
+
+Se in futuro dimentichi un campo o sbagli nome, l’editor te lo segnalerà.
+✔️ Preparare i componenti a ricevere dati
+
+Nelle prossime lezioni, questa interfaccia verrà usata per:
+
+    tipizzare gli @Input() del componente HousingLocation
+
+    tipizzare i dati provenienti da un servizio
+
+    generare la lista delle case nella Home

@@ -1,0 +1,124 @@
+Con Add the search feature to your app, l’utente può filtrare la lista delle case digitando il nome della città o della proprietà.
+È un passo che rende l’app molto più interattiva e professionale.
+
+
+🎯 Obiettivo della lezione
+
+Questa pagina ti guida a:
+
+    aggiungere un campo di ricerca nella Home
+
+    collegarlo a una proprietà del componente
+
+    filtrare dinamicamente la lista delle case
+
+    usare un metodo del servizio per effettuare la ricerca
+
+Alla fine, l’utente potrà digitare un testo e vedere la lista aggiornarsi.
+
+
+🧱 1. Aggiungere il campo di ricerca nel template della Home
+
+Apri:
+src/app/home/home.component.html
+
+La pagina ti fa aggiungere un input simile a questo:
+html
+
+<input
+  type="text"
+  placeholder="Search by city"
+  [(ngModel)]="filter"
+  (input)="filterResults()"
+/>
+
+Vediamo cosa succede.
+✔️ [(ngModel)]="filter"
+
+Collega il valore dell’input alla proprietà filter del componente.
+✔️ (input)="filterResults()"
+
+Ogni volta che l’utente digita, viene chiamato il metodo filterResults().
+
+
+🧩 2. Aggiungere la proprietà e il metodo nel componente Home
+
+Apri:
+src/app/home/home.component.ts
+
+La pagina ti fa aggiungere:
+ts
+
+filter = '';
+filteredLocationList: HousingLocation[] = [];
+
+Poi aggiorni ngOnInit:
+ts
+
+ngOnInit() {
+  this.housingLocationList = this.housingService.getAllHousingLocations();
+  this.filteredLocationList = this.housingLocationList;
+}
+
+E aggiungi il metodo di filtro:
+ts
+
+filterResults() {
+  if (!this.filter) {
+    this.filteredLocationList = this.housingLocationList;
+    return;
+  }
+
+  this.filteredLocationList = this.housingLocationList.filter(
+    housingLocation =>
+      housingLocation.city
+        .toLowerCase()
+        .includes(this.filter.toLowerCase())
+  );
+}
+
+
+🔗 3. Aggiornare il template per usare la lista filtrata
+
+Nel template della Home, sostituisci:
+html
+
+@for (housingLocation of housingLocationList; track housingLocation.id) {
+
+con:
+html
+
+@for (housingLocation of filteredLocationList; track housingLocation.id) {
+
+Ora la lista mostrata è quella filtrata.
+
+
+🧠 4. Cosa stai imparando davvero
+✔️ Two‑way binding con [(ngModel)]
+
+L’input aggiorna automaticamente la proprietà filter.
+✔️ Event binding con (input)
+
+Ogni modifica scatena un metodo del componente.
+✔️ Filtrare dati in modo reattivo
+
+La lista si aggiorna mentre l’utente digita.
+✔️ Separazione della logica
+
+Il componente gestisce il filtro, il servizio fornisce i dati.
+✔️ UX moderna
+
+La ricerca è immediata e senza ricaricare la pagina.
+
+
+🖼️ 5. Risultato finale
+
+Dopo questa lezione:
+
+    la Home ha un campo di ricerca
+
+    l’utente può filtrare le case per città
+
+    la lista si aggiorna in tempo reale
+
+    l’app è molto più usabile e completa

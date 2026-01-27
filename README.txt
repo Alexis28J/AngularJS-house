@@ -23,3 +23,6 @@ Installa Angular CLI globalmente: npm install -g @angular/cli
 
 Ultimo passo del tutorial (Aggiungere communicazione HTTP): Bisogna installare JSON server, quindi eseguire il commando npm install -g json-server
 https://angular.dev/tutorials/first-app/14-http
+
+
+Spiegazione passo a passo da Copilot: https://copilot.microsoft.com/shares/fgkvUcse172g1BZnf7uNy
