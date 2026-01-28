@@ -1,89 +1,54 @@
-È il momento in cui la tua applicazione smette di essere una singola pagina statica e diventa una vera SPA (Single Page Application).
+Perfetto, arriviamo alla lezione 10 – Routing, una delle più importanti perché introduce la navigazione tra pagine nella tua app Angular.
+Finora hai una sola pagina (Home), ma ora aggiungerai la pagina dei dettagli di una casa e imparerai come spostarti da una vista all’altra.
 
 
 🧭 Obiettivo della lezione
 
-La pagina ti insegna a:
+Questa sezione ti insegna a:
 
-    configurare il router di Angular
+    - configurare il router di Angular;
+    - creare una pagina di dettaglio per una singola casa;
+    - usare parametri dinamici nell’URL (es. /details/3);
+    - navigare tramite link.
 
-    definire le prime rotte dell’app
+È il momento in cui la tua app diventa una vera SPA (Single Page Application).
 
-    collegare i componenti alle rotte
+-------------------------------------------------------------------------------------------------------------
+🧩 1. Creare la pagina dei dettagli
 
-    usare <router-outlet> per mostrare le pagine
+Il tutorial ti fa creare un nuovo componente:
+src/app/details/details.component.ts
 
-Dopo questa lezione potrai navigare tra Home e Details.
-
-
-🧱 1. Creare il file di routing
-
-Angular crea automaticamente un file di routing quando generi il progetto:
-src/app/app.routes.ts
-
-Se non esistesse, la lezione ti farebbe crearlo, ma nel tutorial è già presente.
-
-Questo file conterrà la definizione delle rotte.
-
-
-🗺️ 2. Definire le rotte dell’app
-
-La pagina ti fa aprire:
-src/app/app.routes.ts
-
-e aggiungere qualcosa di simile:
+Esempio semplificato:
 ts
 
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { DetailsComponent } from './details/details.component';
+import { Component } from '@angular/core';
 
-export const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
-  {
-    path: 'details/:id',
-    component: DetailsComponent
-  }
-];
+@Component({
+  selector: 'app-details',
+  standalone: true,
+  template: `
+    <section>
+      <h2>Housing Details</h2>
+    </section>
+  `,
+})
+export class DetailsComponent {}
 
-Vediamo cosa significa.
-✔️ path: ''
+Questa sarà la pagina che mostra le informazioni di una singola casa.
 
-La rotta vuota è la homepage.
-✔️ path: 'details/:id'
+--------------------------------------------------------------------------------------------------------------------------
 
-Questa rotta mostra i dettagli di una singola casa.
-id è un parametro dinamico: ogni casa avrà un URL diverso.
+🗺️ 2. Configurare il router
 
+Angular 17+ usa un router molto più semplice grazie ai componenti standalone.
 
-🧩 3. Aggiungere il router all’app
-
-Nel file:
-src/app/app.component.html
-
-la pagina ti fa sostituire il contenuto con:
-html
-
-<router-outlet></router-outlet>
-
-Questo tag speciale è il punto in cui Angular inserirà il componente corrispondente alla rotta attiva.
-
-È come dire:
-
-    “Mostra qui la pagina corrente”.
-
-
-🔗 4. Aggiornare il main.ts
-
-Il file main.ts deve dire ad Angular di usare il router.
-
-La pagina ti fa aggiungere:
+Nel file main.ts aggiungi:
 ts
 
+import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
@@ -92,33 +57,102 @@ bootstrapApplication(AppComponent, {
   ]
 });
 
-Questo collega le rotte definite al sistema di bootstrap dell’app.
+Poi crei il file delle rotte:
+src/app/app.routes.ts
+
+Con qualcosa del genere:
+ts
+
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { DetailsComponent } from './details/details.component';
+
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'details/:id', component: DetailsComponent }
+];
+
+Cosa impari:
+
+    - path: '' → pagina principale.
+    - path: 'details/:id' → rotta con parametro dinamico.
+    - :id rappresenta l’identificativo della casa.
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+🔗 3. Aggiungere un link alla pagina dei dettagli
+
+Nel componente HousingLocationComponent, aggiungi un link:
+html
+
+<a [routerLink]="['/details', housingLocation.id]">
+  Learn more
+</a>
+
+Cosa succede:
+    - Angular costruisce l’URL /details/ID.
+    - Cliccando, il router carica DetailsComponent.
+
+--------------------------------------------------------------------------------------------------------------------
+
+📥 4. Recuperare il parametro id nella pagina dei dettagli
+
+Nel componente DetailsComponent, usi ActivatedRoute per leggere l’ID dalla URL:
+ts
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HousingService } from '../housing.service';
+
+@Component({
+  selector: 'app-details',
+  standalone: true,
+  templateUrl: './details.component.html',
+})
+export class DetailsComponent {
+  constructor(
+    private route: ActivatedRoute,
+    private housingService: HousingService
+  ) {}
+
+  housingLocation = this.housingService.getHousingLocationById(
+    Number(this.route.snapshot.params['id'])
+  );
+}
+
+Concetti chiave:
+    - ActivatedRoute → permette di leggere i parametri dell’URL.
+    - snapshot.params['id'] → ottieni l’ID.
+    - Il servizio recupera i dati della casa corrispondente.
+
+-----------------------------------------------------------------------------------------------------------------
+
+🖼️ 5. Mostrare i dettagli nel template
+
+Ora il template può mostrare i dati:
+html
+
+<section *ngIf="housingLocation">
+  <h2>{{ housingLocation.name }}</h2>
+  <img [src]="housingLocation.photo">
+  <p>{{ housingLocation.city }}, {{ housingLocation.state }}</p>
+</section>
+
+-----------------------------------------------------------------------------------------------------------
+
+🎯 Risultato della lezione
+
+Dopo questa sezione:
+    - la tua app ha due pagine: Home e Details;
+    - puoi navigare tra le pagine senza ricaricare il browser;
+
+hai imparato a usare:
+        - il router,
+        - i parametri dinamici,
+        - i link con routerLink,
+        - i servizi per recuperare i dati.
+
+La tua app ora è una vera SPA moderna.
 
 
-🧠 5. Cosa stai imparando davvero
-✔️ Routing moderno con provideRouter
-
-Angular usa un approccio più semplice rispetto ai vecchi moduli.
-✔️ Parametri dinamici nelle rotte
-
-details/:id permette di creare pagine diverse per ogni casa.
-✔️ Separazione tra struttura e navigazione
-
-I componenti non decidono dove appaiono: lo fa il router.
-✔️ SPA (Single Page Application)
-
-La navigazione avviene senza ricaricare la pagina.
-
-
-🖼️ 6. Risultato finale
-
-Dopo questa lezione:
-
-    la tua app ha due pagine: Home e Details
-
-    puoi navigare tra loro tramite URL
-
-    <router-outlet> mostra la pagina corretta
-
-    sei pronto per aggiungere i link e caricare i dati della singola casa
-
+Link Copilot:  https://copilot.microsoft.com/shares/HyrfjjnyWXK8cddT8qHGW
