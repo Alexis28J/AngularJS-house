@@ -1,124 +1,124 @@
-Con Add the search feature to your app, l’utente può filtrare la lista delle case digitando il nome della città o della proprietà.
-È un passo che rende l’app molto più interattiva e professionale.
+Perfetto, continuiamo con la lezione 13 – Search, in cui aggiungi una funzionalità di ricerca alla pagina Home.
+Questa parte è molto utile perché rende l’app interattiva e introduce un pattern comune: filtrare una lista in base all’input dell’utente.
 
 
-🎯 Obiettivo della lezione
+🔍 Obiettivo della lezione
 
-Questa pagina ti guida a:
+In questa sezione imparerai a:
+    - aggiungere un campo di ricerca nella pagina Home;
+    - collegare l’input dell’utente a una proprietà del componente;
+    - filtrare dinamicamente la lista delle case;
+    - mostrare solo i risultati che corrispondono al testo inserito.
 
-    aggiungere un campo di ricerca nella Home
+---------------------------------------------------------------------------------------------------
 
-    collegarlo a una proprietà del componente
+🧩 1. Aggiungere una lista filtrata nel componente Home
 
-    filtrare dinamicamente la lista delle case
-
-    usare un metodo del servizio per effettuare la ricerca
-
-Alla fine, l’utente potrà digitare un testo e vedere la lista aggiornarsi.
-
-
-🧱 1. Aggiungere il campo di ricerca nel template della Home
-
-Apri:
-src/app/home/home.component.html
-
-La pagina ti fa aggiungere un input simile a questo:
-html
-
-<input
-  type="text"
-  placeholder="Search by city"
-  [(ngModel)]="filter"
-  (input)="filterResults()"
-/>
-
-Vediamo cosa succede.
-✔️ [(ngModel)]="filter"
-
-Collega il valore dell’input alla proprietà filter del componente.
-✔️ (input)="filterResults()"
-
-Ogni volta che l’utente digita, viene chiamato il metodo filterResults().
-
-
-🧩 2. Aggiungere la proprietà e il metodo nel componente Home
-
-Apri:
-src/app/home/home.component.ts
-
-La pagina ti fa aggiungere:
+Finora avevi una sola lista: housingLocationList.
+Ora ne aggiungi una seconda:
 ts
 
-filter = '';
 filteredLocationList: HousingLocation[] = [];
 
-Poi aggiorni ngOnInit:
+Poi, nel costruttore, inizializzi entrambe:
 ts
 
-ngOnInit() {
+constructor(private housingService: HousingService) {
   this.housingLocationList = this.housingService.getAllHousingLocations();
   this.filteredLocationList = this.housingLocationList;
 }
 
-E aggiungi il metodo di filtro:
+Perché serve una seconda lista?
+    - housingLocationList → contiene tutti i dati.
+    - filteredLocationList → contiene solo i risultati filtrati.
+
+------------------------------------------------------------------------------------------------------------------
+
+🧠 2. Aggiungere il metodo di ricerca
+
+Nel componente Home aggiungi un metodo che filtra la lista:
 ts
 
-filterResults() {
-  if (!this.filter) {
+filterResults(text: string) {
+  if (!text) {
     this.filteredLocationList = this.housingLocationList;
     return;
   }
 
   this.filteredLocationList = this.housingLocationList.filter(
-    housingLocation =>
-      housingLocation.city
-        .toLowerCase()
-        .includes(this.filter.toLowerCase())
+    location => location.name.toLowerCase().includes(text.toLowerCase())
   );
 }
 
+Cosa fa:
+    - Se il campo è vuoto → mostra tutte le case.
+    - Altrimenti → mostra solo quelle il cui nome contiene il testo inserito.
 
-🔗 3. Aggiornare il template per usare la lista filtrata
+-----------------------------------------------------------------------------------------------------------
 
-Nel template della Home, sostituisci:
+🖼️ 3. Aggiungere il campo di ricerca nel template
+
+Nel file home.component.html, aggiungi un input:
 html
 
-@for (housingLocation of housingLocationList; track housingLocation.id) {
+<section class="search">
+  <input
+    type="text"
+    placeholder="Search by name"
+    #searchInput
+  >
+  <button (click)="filterResults(searchInput.value)">
+    Search
+  </button>
+</section>
 
-con:
+Concetti introdotti:
+    - #searchInput → template reference variable (riferimento all’input).
+    - (click)="..." → event binding.
+    - searchInput.value → valore digitato dall’utente.
+
+------------------------------------------------------------------------------------------------------------------------
+
+🧱 4. Usare la lista filtrata nel template
+
+Aggiorna il tuo *ngFor per usare la lista filtrata:
 html
 
-@for (housingLocation of filteredLocationList; track housingLocation.id) {
+<ul>
+  <li *ngFor="let housingLocation of filteredLocationList">
+    <app-housing-location
+      [housingLocation]="housingLocation">
+    </app-housing-location>
+  </li>
+</ul>
 
-Ora la lista mostrata è quella filtrata.
+Ora la UI mostra solo i risultati filtrati.
 
+---------------------------------------------------------------------------------------------
 
-🧠 4. Cosa stai imparando davvero
-✔️ Two‑way binding con [(ngModel)]
-
-L’input aggiorna automaticamente la proprietà filter.
-✔️ Event binding con (input)
-
-Ogni modifica scatena un metodo del componente.
-✔️ Filtrare dati in modo reattivo
-
-La lista si aggiorna mentre l’utente digita.
-✔️ Separazione della logica
-
-Il componente gestisce il filtro, il servizio fornisce i dati.
-✔️ UX moderna
-
-La ricerca è immediata e senza ricaricare la pagina.
+🧪 5. Come funziona l’esperienza utente
+    - L’utente digita un testo nel campo di ricerca.
+    - Clicca su Search.
+    - Angular chiama filterResults().
+    - La lista filtrata si aggiorna.
+    - Il template si aggiorna automaticamente.
 
 
-🖼️ 5. Risultato finale
+🎯 Risultato della lezione
 
-Dopo questa lezione:
+Dopo questa sezione:
 
-    la Home ha un campo di ricerca
+    - la tua app ha una ricerca funzionante;
+    - la lista delle case si aggiorna dinamicamente;
 
-    l’utente può filtrare le case per città
+    hai imparato a usare:
 
-    la lista si aggiorna in tempo reale
+        - template reference variables,
+        - event binding,
+        - filtering in TypeScript,
+        - liste dinamiche con *ngFor.
 
-    l’app è molto più usabile e completa
+La tua Home ora è molto più interattiva e utile.
+
+
+Link Copilot:  https://copilot.microsoft.com/shares/4pZEaVTEbxTzHZqtx6C14
